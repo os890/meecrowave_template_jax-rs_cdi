@@ -30,7 +30,7 @@
     <version>1.0.0</version>
 
     <properties>
-        <ds.version>1.9.0</ds.version>
+        <ds.version>1.9.2</ds.version>
         <meecrowave.version>1.2.9</meecrowave.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
