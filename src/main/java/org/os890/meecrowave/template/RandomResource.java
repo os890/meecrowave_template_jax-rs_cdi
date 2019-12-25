@@ -21,19 +21,23 @@ package org.os890.meecrowave.template;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.security.SecureRandom;
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+@Path("random")
 @ApplicationScoped
-public class ApplicationScopedBean {
-    private SecureRandom random = new SecureRandom();
+public class RandomResource {
+    @Inject
+    private ApplicationScopedBean applicationScopedBean;
 
-    @Counted(monotonic = true)
-    public int getRandom() {
-        return random.nextInt();
-    }
-
-    @Counted(monotonic = true)
-    public int getValue() {
-        return 14;
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Counted
+    public RandomResponse next() {
+        return new RandomResponse(applicationScopedBean::getRandom);
     }
 }
